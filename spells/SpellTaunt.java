@@ -13,7 +13,6 @@ import com.unrulymyth.spells.SpellInterface;
 
 public class SpellTaunt implements SpellInterface {
 
-
     private RpgSpells plugin;
 
     public SpellTaunt(RpgSpells plugin) {
