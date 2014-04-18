@@ -1,13 +1,8 @@
 package com.unrulymyth;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
-import com.unrulymyth.RpgSpells;
-import com.unrulymyth.commands.SpellsCommands;
-import com.unrulymyth.listeners.PlayerLevelUpListener;
 import com.unrulymyth.spells.SpellInterface;
-import com.unrulymyth.spells.SpellTeleport;
 import com.unrulymyth.spells.SpellTaunt;
+import com.unrulymyth.spells.SpellTeleport;
 
 public class SpellRepository {
 
@@ -15,22 +10,28 @@ public class SpellRepository {
 
     private SpellInterface[] spellClasses;
 
-    public SpellRepository(RpgSpells plugin) {
-        this.plugin = plugin;
+    public SpellRepository(RpgSpells instance) {
+        plugin = instance;
 
-        this.spellClasses = new SpellInterface[]{
+        spellClasses = new SpellInterface[]{
             new SpellTeleport(plugin),
             new SpellTaunt(plugin)
         };
     }
 
     public SpellInterface getSpell(String name) {
-        for (SpellInterface spell : this.spellClasses) {
-            if (spell.getName().toLowerCase() == name.toLowerCase()) {
-                return spell;
-            }
-        }
-
-        throw new Exception("Couldn't find a spell with that name.")
-    }
+    	try {
+    		System.out.println(spellClasses.length);
+    		for (SpellInterface spell : this.spellClasses) {
+                if (spell.getName().toLowerCase() == name.toLowerCase()) {
+                	System.out.println(spell.getName());
+                    return spell;
+                }
+            }	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		System.out.println("Exception in SpellRepository");
+    	}
+		return false;
+    } 
 }
