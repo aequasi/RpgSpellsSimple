@@ -26,15 +26,15 @@ public class SpellTeleport implements SpellInterface {
         this.plugin = plugin;
     }
 
-    private RpgSpells function getPlugin() {
+    private RpgSpells getPlugin() {
         return this.plugin;
     }
 
-    public String function getName() {
+    public String getName() {
         return "teleport";
     }
 
-    public boolean function cast(Player player) {
+    public boolean cast(Player player) {
         int cooldownTime = getPlugin().getConfig().getInt("teleport.cooldown");
 
         if (player.getLevel() >= 2) {
@@ -77,7 +77,7 @@ public class SpellTeleport implements SpellInterface {
         return true;
     }
 
-    private Block function getTarget(Player player, Integer range) {
+    private Block getTarget(Player player, Integer range) {
         BlockIterator iter = new BlockIterator(player, range);
         Block lastBlock = iter.next();
 

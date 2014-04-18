@@ -25,7 +25,7 @@ public class SpellRepository {
         };
     }
 
-    public SpellInterface function getSpell(String name) {
+    public SpellInterface getSpell(String name) {
         for (SpellInterface spell : this.spellClasses) {
             if (spell.getName().toLowerCase() == name.toLowerCase()) {
                 return spell;

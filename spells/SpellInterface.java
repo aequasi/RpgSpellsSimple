@@ -4,9 +4,9 @@ import org.bukkit.entity.Player;
 import com.unrulymyth.RpgSpells;
 
 public interface SpellInterface {
-    private RpgSpells function getPlugin();
+    private RpgSpells getPlugin();
 
-    public String function getName();
+    public String getName();
 
-    public boolean function cast(Player player);
+    public boolean cast(Player player);
 }

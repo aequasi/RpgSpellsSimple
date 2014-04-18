@@ -20,15 +20,15 @@ public class SpellTaunt implements SpellInterface {
         this.plugin = plugin;
     }
 
-    private RpgSpells function getPlugin() {
+    private RpgSpells getPlugin() {
         return this.plugin;
     }
 
-    public String function getName() {
+    public String getName() {
         return "taunt";
     }
 
-	public boolean function cast(Player player) {
+	public boolean cast(Player player) {
 		List<Entity> entities = player.getNearbyEntities(5.0, 5.0, 5.0);
 
         boolean targetSet = false;
