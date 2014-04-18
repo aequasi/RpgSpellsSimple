@@ -5,11 +5,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.unrulymyth.commands.SpellsCommands;
 import com.unrulymyth.listeners.PlayerLevelUpListener;
 import com.unrulymyth.spells.SpellTeleport;
+import com.unrulymyth.SpellRepository;
 
 
 public class RpgSpells extends JavaPlugin {
 	
-	SpellTeleport st = new SpellTeleport(this);
+	private SpellRepository spellRepository;
 	
 	public void onEnable() {
 		super.onEnable();
@@ -18,8 +19,11 @@ public class RpgSpells extends JavaPlugin {
 		saveConfig();
 		
 		getServer().getPluginManager().registerEvents(new PlayerLevelUpListener(), this);
+
+        this.spellRepository = new SpellRepository(this);
 		
-		SpellsCommands cmd = new SpellsCommands(this);
+		SpellsCommands cmd = new SpellsCommands(this, this.spellRepository);
+
 		getCommand("rpg").setExecutor(cmd);
 	}
 	
