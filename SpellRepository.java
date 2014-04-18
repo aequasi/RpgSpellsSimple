@@ -9,7 +9,6 @@ import com.unrulymyth.spells.SpellInterface;
 import com.unrulymyth.spells.SpellTeleport;
 import com.unrulymyth.spells.SpellTaunt;
 
-
 public class SpellRepository {
 
     private RpgSpells plugin;
@@ -19,7 +18,7 @@ public class SpellRepository {
     public SpellRepository(RpgSpells plugin) {
         this.plugin = plugin;
 
-        this.spellClasses = {
+        this.spellClasses = new SpellInterface[]{
             new SpellTeleport(plugin),
             new SpellTaunt(plugin)
         };
