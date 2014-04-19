@@ -1,30 +1,32 @@
 package com.unrulymyth;
 
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.unrulymyth.commands.SpellsCommands;
+import com.unrulymyth.listeners.PlayerJoinListener;
 import com.unrulymyth.listeners.PlayerLevelUpListener;
-import com.unrulymyth.spells.SpellTeleport;
-import com.unrulymyth.SpellRepository;
+import com.unrulymyth.mana.Mana;
 
 
 public class RpgSpells extends JavaPlugin {
-	
-	private SpellRepository spellRepository;
+
+	SpellRepository sp = new SpellRepository(this);
+	Mana mana = new Mana();
 	
 	public void onEnable() {
 		super.onEnable();
-		
+
 		getConfig().options().copyDefaults(true);
 		saveConfig();
+
 		
 		getServer().getPluginManager().registerEvents(new PlayerLevelUpListener(), this);
+		getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
-        this.spellRepository = new SpellRepository(this);
-		
-		SpellsCommands cmd = new SpellsCommands(this, this.spellRepository);
-
-		getCommand("rpg").setExecutor(cmd);
+		getCommand("rpg").setExecutor(new SpellsCommands(this, sp));
 	}
 	
 	public void onDisable() {

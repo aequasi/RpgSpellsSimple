@@ -6,14 +6,10 @@ import com.unrulymyth.spells.SpellTeleport;
 
 public class SpellRepository {
 
-    private RpgSpells plugin;
-
     private SpellInterface[] spellClasses;
 
-    public SpellRepository(RpgSpells instance) {
-        plugin = instance;
-
-        spellClasses = new SpellInterface[]{
+    public SpellRepository(RpgSpells plugin) {
+        this.spellClasses = new SpellInterface[]{
             new SpellTeleport(plugin),
             new SpellTaunt(plugin)
         };
@@ -21,10 +17,8 @@ public class SpellRepository {
 
     public SpellInterface getSpell(String name) {
     	try {
-    		System.out.println(spellClasses.length);
     		for (SpellInterface spell : this.spellClasses) {
-                if (spell.getName().toLowerCase() == name.toLowerCase()) {
-                	System.out.println(spell.getName());
+                if (spell.getName().toLowerCase().equalsIgnoreCase(name.toLowerCase())) {
                     return spell;
                 }
             }	
@@ -32,6 +26,6 @@ public class SpellRepository {
     		e.printStackTrace();
     		System.out.println("Exception in SpellRepository");
     	}
-		return false;
+		return null;
     } 
 }
