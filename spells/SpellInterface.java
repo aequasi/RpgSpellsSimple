@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import com.unrulymyth.RpgSpells;
 
 public interface SpellInterface {
-    private RpgSpells getPlugin();
+    public RpgSpells getPlugin();
 
     public String getName();
 

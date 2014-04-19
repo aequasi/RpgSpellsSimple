@@ -2,6 +2,7 @@ package com.unrulymyth.spells;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,16 +10,16 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
+
 import com.unrulymyth.RpgSpells;
-import com.unrulymyth.spells.SpellInterface;
-import com.unrulymyth.commands.SpellsCommands;
+import com.unrulymyth.mana.Mana;
 
 public class SpellTeleport implements SpellInterface {
 
     private RpgSpells plugin;
+    private Mana mana = new Mana();
 
     private Map<String, Long> cooldownTeleport = new HashMap<String, Long>();
 
@@ -26,7 +27,7 @@ public class SpellTeleport implements SpellInterface {
         this.plugin = plugin;
     }
 
-    private RpgSpells getPlugin() {
+    public RpgSpells getPlugin() {
         return this.plugin;
     }
 
@@ -36,6 +37,7 @@ public class SpellTeleport implements SpellInterface {
 
     public boolean cast(Player player) {
         int cooldownTime = getPlugin().getConfig().getInt("teleport.cooldown");
+        int cost = getPlugin().getConfig().getInt("teleport.mana");
 
         if (player.getLevel() >= 2) {
             if (cooldownTeleport.containsKey(player.getName())) {
@@ -68,7 +70,9 @@ public class SpellTeleport implements SpellInterface {
             player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0f, 0);
             World world = player.getWorld();
             world.playEffect(player.getLocation(), Effect.SMOKE, 100);
-
+            
+            plugin.getMana().changeMana(player, cost);
+            
             cooldownTeleport.put(player.getName(), System.currentTimeMillis());
         } else {
             player.sendMessage("You must be level 2 or higher to use this!");
