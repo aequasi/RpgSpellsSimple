@@ -13,6 +13,18 @@ public class Mana {
 	}
 	
 	public void showMana(Player player, int mana) {
+		message = ChatColor.BLUE + "Mana: |";
+		for(int i = 0; i < 10; i++) {
+			if (mana/10 > i) {
+				message += "=";
+			} else {
+				message += ChatColor.RED + "=";
+			}
+		}
+		message += ChatColor.BLUE + "|";
+		
+		return;
+		
 		if (mana == 100) {
 			player.sendMessage(ChatColor.BLUE + "Mana: |==========|");
 		} else if (mana < 99 && mana > 90) {
